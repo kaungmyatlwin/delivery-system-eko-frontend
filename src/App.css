@@ -1,3 +1,15 @@
 .App {
   padding: 25px;
 }
+
+.text-center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-1 {
+  margin-top: 10px;
+}

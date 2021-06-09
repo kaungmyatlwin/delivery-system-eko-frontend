@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import TabPanel from './components/TabPanel';
 import CaseOne from './components/CaseOne';
+import CaseTwo from './components/CaseTwo';
 
 function App() {
   const [tabValue, setTabValue] = useState(0);
@@ -29,7 +30,7 @@ function App() {
             <CaseOne />
           </TabPanel>
           <TabPanel value={tabValue} index={1}>
-
+            <CaseTwo/>
           </TabPanel>
         </Grid>
       </Container>
