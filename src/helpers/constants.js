@@ -1,5 +1,6 @@
 // [town]:[cost]
-const routes = {
+// Make sure these routes are not mutable
+const routes = Object.freeze({
   A: {
     B: 1,
     C: 4,
@@ -22,7 +23,7 @@ const routes = {
   F: {
     D: 1,
   },
-};
+});
 
 export {
   routes,
