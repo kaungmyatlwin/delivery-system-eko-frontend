@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import {
+  Container,
+  Grid,
+  AppBar,
+  Tabs,
+  Tab,
+} from '@material-ui/core';
+import TabPanel from './components/TabPanel';
+import CaseOne from './components/CaseOne';
 
 function App() {
+  const [tabValue, setTabValue] = useState(0);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container maxWidth="sm">
+        <Grid>
+          <AppBar position="static">
+            <Tabs
+              value={tabValue}
+              onChange={(_, newValue) => setTabValue(newValue)}
+              centered>
+              <Tab label="Case 1"></Tab>
+              <Tab label="Case 2"></Tab>
+            </Tabs>
+          </AppBar>
+          <TabPanel value={tabValue} index={0}>
+            <CaseOne />
+          </TabPanel>
+          <TabPanel value={tabValue} index={1}>
+
+          </TabPanel>
+        </Grid>
+      </Container>
     </div>
   );
 }
