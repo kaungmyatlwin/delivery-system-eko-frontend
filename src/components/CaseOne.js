@@ -19,7 +19,7 @@ const styles = {
     marginTop: 5,
     marginBottom: 5,
   },
-  calculateButtonGrid: {
+  calculateButtonWrapper: {
     marginTop: 10,
     textAlign: 'center',
   },
@@ -68,13 +68,12 @@ export default function CaseOne() {
       </Grid>
       <div style={{ textAlign: 'left' }}>
         {routedTowns.map((routedTown, index) => (
-          <div>
+          <div key={index}>
             <InputLabel id={`town${index}`} shrink>Town {index + 1}</InputLabel>
             <Select
               id={`town${index}`}
               placeholder="Town 1"
               style={styles.selectTownsStyle}
-              key={index}
               onChange={(e) => onChangeSelectTown(e, index)}
             >
             {
@@ -86,7 +85,7 @@ export default function CaseOne() {
           </div>
         ))}
       </div>
-      <div style={styles.calculateButtonGrid}>
+      <div style={styles.calculateButtonWrapper}>
         <Button
           disabled={disableCalculateButton}
           variant="contained"
