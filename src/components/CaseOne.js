@@ -10,25 +10,6 @@ import {
 import { getTowns } from '../helpers/utils';
 import { getTotalCostOfRoute } from '../helpers/routesLogic';
 
-const styles = {
-  addTownButton: {
-    float: 'right',
-  },
-  selectTownsStyle: {
-    width: '100%',
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  calculateButtonWrapper: {
-    marginTop: 10,
-    textAlign: 'center',
-  },
-  totalCost: {
-    marginTop: 10,
-    textAlign: 'center',
-  }
-};
-
 const towns = getTowns();
 
 export default function CaseOne() {
@@ -73,7 +54,7 @@ export default function CaseOne() {
             <Select
               id={`town${index}`}
               placeholder="Town 1"
-              style={styles.selectTownsStyle}
+              className="w-100 town-select-style"
               onChange={(e) => onChangeSelectTown(e, index)}
             >
             {
@@ -85,7 +66,7 @@ export default function CaseOne() {
           </div>
         ))}
       </div>
-      <div style={styles.calculateButtonWrapper}>
+      <div className="mt-1 text-center">
         <Button
           disabled={disableCalculateButton}
           variant="contained"
@@ -93,7 +74,7 @@ export default function CaseOne() {
           disableElevation
           onClick={onClickCalculateCost}>Calculate Cost</Button>
       </div>
-      <div style={styles.totalCost}>
+      <div className="mt-1 text-center">
         <Typography variant="h6">
           {totalCost}
         </Typography>
