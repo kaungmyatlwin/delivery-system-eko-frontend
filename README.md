@@ -2,6 +2,9 @@
 
 This project is intended for Amity Coding Test
 
+# Web Demo
+Demo for this project can be viewed at https://delivery-eko-app.kaungmyatlwin.dev/.
+
 # Installation
 
 This project is bootstrapped by Create React App. The usage is similar.
