@@ -49,26 +49,25 @@ export function getPossibleDeliveryRoutes(t1, t2, maxStops, useSameRoute = false
     allPoints[key] = Object.keys(value)
   });
 
-  // Lookup Table
-  const startNodes = Object.keys(startPoint);
-  traverseNodes(startNodes);
+  // Rewrite function
+  let visited = new Set();
 
-  function traverseNodes(nodes) {
-    if (!nodes || nodes.length === 0) {
-      return;
-    };
-
-    if (nodes.includes(t1)) return;
-
-    for (let i = 0; i < nodes.length; i++) {
-      const innerNodes = allPoints[nodes[i]]; // 0 -> B, C, D, B -> E, C -> D, F
-      const foundRoute = innerNodes.findIndex((n) => n === t2);
-      if (foundRoute > -1) {
-        totalPossibleRoutes += 1;
+  function depthFirstSearch(startPoint, endPoint) {
+    visited.add(startPoint);
+    const towns = routes[startPoint];
+    for (const town in towns) {
+      if (!visited.has(town)) {
+        if (Object.keys(towns).includes(endPoint)) {
+          totalPossibleRoutes++;
+        };
+        depthFirstSearch(town, endPoint);
       }
-      traverseNodes(innerNodes);
     }
   }
+
+  depthFirstSearch('E', 'D');
+  console.log('visited -> ', visited);
+  console.log('Total possible routes', totalPossibleRoutes);
 
   return totalPossibleRoutes;
 }
