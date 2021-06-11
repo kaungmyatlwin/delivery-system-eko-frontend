@@ -34,8 +34,8 @@ export function getTotalCostOfRoute(towns = []) {
 
 /**
  * Gets all the possible deliver routes between 2 towns.
- * @param {Number} t1 Town 1
- * @param {Number} t2 Town 2
+ * @param {String} t1 Town 1
+ * @param {String} t2 Town 2
  * @returns {Number}
  */
 export function getPossibleDeliveryRoutes(t1, t2, maxStops, useSameRoute = false) {
@@ -55,7 +55,7 @@ export function getPossibleDeliveryRoutes(t1, t2, maxStops, useSameRoute = false
       if (!visited.has(town)) {
         depthFirstSearch(town, visited);
       } else {
-        visited.delete(town); // Why does this work?
+        visited.delete(town);
       }
     }
     return false;
