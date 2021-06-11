@@ -42,32 +42,26 @@ export function getPossibleDeliveryRoutes(t1, t2, maxStops, useSameRoute = false
   if (!t1 || !t2) return;
 
   let totalPossibleRoutes = 0;
-  const startPoint = routes[t1];
-  const allPoints = {};
 
-  Object.entries(routes).forEach(([key, value]) => {
-    allPoints[key] = Object.keys(value)
-  });
-
-  // Rewrite function
-  let visited = new Set();
-
-  function depthFirstSearch(startPoint, endPoint) {
-    visited.add(startPoint);
-    const towns = routes[startPoint];
+  // Discard the algorithm. It is buggy.
+  function depthFirstSearch(start, visited = new Set()) {
+    visited.add(start);
+    const towns = routes[start]; // A, B | B,D,E
+    // Get the towns of the start point
     for (const town in towns) {
+      if (town === t2) {
+        totalPossibleRoutes++;
+      }
       if (!visited.has(town)) {
-        if (Object.keys(towns).includes(endPoint)) {
-          totalPossibleRoutes++;
-        };
-        depthFirstSearch(town, endPoint);
+        depthFirstSearch(town, visited);
+      } else {
+        visited.delete(town); // Why does this work?
       }
     }
+    return false;
   }
 
-  depthFirstSearch('E', 'D');
-  console.log('visited -> ', visited);
-  console.log('Total possible routes', totalPossibleRoutes);
+  depthFirstSearch(t1);
 
   return totalPossibleRoutes;
 }
