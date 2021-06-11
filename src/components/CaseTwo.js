@@ -4,48 +4,50 @@ import {
   Button,
   MenuItem,
   InputLabel,
-  Typography
+  Typography,
+  TextField,
 } from '@material-ui/core';
 import { getTowns } from '../helpers/utils';
 import { getPossibleDeliveryRoutes } from '../helpers/routesLogic';
 
 const towns = getTowns();
 
-const styles = {
-  townSelector: {
-    width: '100%',
-  },
-};
-
 export default function CaseTwo() {
-  const [startPoint, setStartPoint] = useState('E');
-  const [endPoint, setEndPoint] = useState('D');
+  const [startPoint, setStartPoint] = useState('');
+  const [endPoint, setEndPoint] = useState('');
+  const [maxStops, setMaximumStops] = useState(4);
   const [totalRoutes, setTotalRoutes] = useState(null);
 
   function onClickFindTotalRoutes() {
     setTotalRoutes(
-      getPossibleDeliveryRoutes(startPoint, endPoint)
+      getPossibleDeliveryRoutes(startPoint, endPoint, maxStops),
     );
+  }
+
+  function onChangeMaximumStops(e) {
+    setMaximumStops(parseInt(e.target.value));
   }
 
   return(
     <>
-      <div>
-        <InputLabel id="startPoint">Start from</InputLabel>
-        <Select
-          id="startPoint"
-          style={styles.townSelector}
-          onChange={(e) => setStartPoint(e.target.value)}>
-          {
-            towns.map((town) => (
-              <MenuItem key={town} value={town}>{town}</MenuItem>
-            ))
-          }
-        </Select>
+      <div className="mt-1">
+          <InputLabel id="startPoint">Start from</InputLabel>
+          <Select
+            id="startPoint"
+            className="w-100"
+            onChange={(e) => setStartPoint(e.target.value)}>
+            {
+              towns.map((town) => (
+                <MenuItem key={town} value={town}>{town}</MenuItem>
+              ))
+            }
+          </Select>
+       </div>
+       <div className="mt-1">
         <InputLabel id="endPoint">End at</InputLabel>
         <Select
           id="endPoint"
-          style={styles.townSelector}
+          className="w-100"
           onChange={(e) => setEndPoint(e.target.value)}
         >
           {
@@ -54,13 +56,14 @@ export default function CaseTwo() {
             ))
           }
         </Select>
-        {/* <TextField
-          label="Maximum stops"
-          type="number"
-          placeholder="eg: 2"
-          className="w-100"
-        /> */}
-      </div>
+       </div>
+      <TextField
+        label="Maximum stops"
+        type="number"
+        placeholder="eg: 2"
+        className="w-100"
+        onChange={onChangeMaximumStops}
+      />
       <div className="text-center mt-1">
         <Button
           variant="contained"
