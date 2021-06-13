@@ -15,8 +15,10 @@ const towns = getTowns();
 export default function CaseTwo() {
   const [startPoint, setStartPoint] = useState('');
   const [endPoint, setEndPoint] = useState('');
-  const [maxStops, setMaximumStops] = useState(4);
+  const [maxStops, setMaximumStops] = useState();
   const [totalRoutes, setTotalRoutes] = useState(null);
+
+  const disableFindRouteButton = startPoint === '' || endPoint === '';
 
   function onClickFindTotalRoutes() {
     setTotalRoutes(
@@ -34,6 +36,7 @@ export default function CaseTwo() {
           <InputLabel id="startPoint">Start from</InputLabel>
           <Select
             id="startPoint"
+            value={startPoint}
             className="w-100"
             onChange={(e) => setStartPoint(e.target.value)}>
             {
@@ -46,6 +49,7 @@ export default function CaseTwo() {
        <div className="mt-1">
         <InputLabel id="endPoint">End at</InputLabel>
         <Select
+          value={endPoint}
           id="endPoint"
           className="w-100"
           onChange={(e) => setEndPoint(e.target.value)}
@@ -69,6 +73,7 @@ export default function CaseTwo() {
           variant="contained"
           color="primary"
           disableElevation
+          disabled={disableFindRouteButton}
           onClick={onClickFindTotalRoutes}
         >Find Total Routes</Button>
       </div>
