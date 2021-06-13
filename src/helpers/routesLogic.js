@@ -38,30 +38,41 @@ export function getTotalCostOfRoute(towns = []) {
  * @param {String} t2 Town 2
  * @returns {Number}
  */
-export function getPossibleDeliveryRoutes(t1, t2, maxStops, useSameRoute = false) {
+export function getPossibleDeliveryRoutes(t1, t2, maxStops, getRoutes = false) {
   if (!t1 || !t2) return;
 
   let totalPossibleRoutes = 0;
 
-  // Discard the algorithm. It is buggy.
-  function depthFirstSearch(start, visited = new Set()) {
-    visited.add(start);
-    const towns = routes[start]; // A, B | B,D,E
-    // Get the towns of the start point
-    for (const town in towns) {
+  function dfsRecursive(start, currentRoute = '') {
+    if (!start) return;
+
+    const edges = Object.keys(routes[start]);
+    // edges are towns interconnected from starting point
+    currentRoute += start;
+    // Exclude start point
+    if (currentRoute.length - 1 > maxStops) return;
+
+    for (let i = 0; i < edges.length; i++) {
+      const town = edges[i];
+
       if (town === t2) {
-        totalPossibleRoutes++;
+        return totalPossibleRoutes++;
       }
-      if (!visited.has(town)) {
-        depthFirstSearch(town, visited);
-      } else {
-        visited.delete(town);
+
+      // Big problem about this case is the handling of infinite loop
+      // EAEBEA... can result in infinite loop
+      // Have to find if this has circular structure around the string
+      const alreadyVisited = currentRoute.indexOf(
+        `${currentRoute[currentRoute.length - 1]}${town}`
+      ) > -1;
+
+      if (!alreadyVisited) {
+        dfsRecursive(town, currentRoute);
       }
     }
-    return false;
   }
 
-  depthFirstSearch(t1);
+  dfsRecursive(t1);
 
   return totalPossibleRoutes;
 }
