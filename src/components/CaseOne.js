@@ -13,7 +13,7 @@ import { getTotalCostOfRoute } from '../helpers/routesLogic';
 const towns = getTowns();
 
 export default function CaseOne() {
-  const [routedTowns, setRoutedTowns] = useState([]);
+  const [routedTowns, setRoutedTowns] = useState([null, null]);
   const [totalCost, setTotalCost] = useState(null);
 
   const disableCalculateButton = routedTowns.length === 0 || routedTowns.includes(null);
@@ -76,7 +76,13 @@ export default function CaseOne() {
       </div>
       <div className="mt-1 text-center">
         <Typography variant="h6">
-          {totalCost}
+        {
+          typeof totalCost === 'number'
+            ?
+            <>Total cost for {routedTowns.length} towns is {totalCost}.</>
+            :
+            <>{totalCost}</>
+        }
         </Typography>
       </div>
     </>

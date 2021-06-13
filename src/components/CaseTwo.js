@@ -18,7 +18,7 @@ export default function CaseTwo() {
   const [maxStops, setMaximumStops] = useState();
   const [totalRoutes, setTotalRoutes] = useState(null);
 
-  const disableFindRouteButton = startPoint === '' || endPoint === '';
+  const disableFindRouteButton = startPoint === '' || endPoint === '' || maxStops < 0;
 
   function onClickFindTotalRoutes() {
     setTotalRoutes(
@@ -66,6 +66,7 @@ export default function CaseTwo() {
         type="number"
         placeholder="eg: 2"
         className="w-100"
+        inputProps={{ min: 0 }}
         onChange={onChangeMaximumStops}
       />
       <div className="text-center mt-1">
@@ -78,7 +79,12 @@ export default function CaseTwo() {
         >Find Total Routes</Button>
       </div>
       <div className="text-center mt-1">
-        <Typography variant="h6">{totalRoutes}</Typography>
+        {
+          totalRoutes &&
+            <Typography variant="h6">
+              Total possible routes from {startPoint} to {endPoint} is {totalRoutes}.
+            </Typography>
+        }
       </div>
     </>
   );
