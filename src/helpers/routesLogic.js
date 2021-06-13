@@ -49,8 +49,11 @@ export function getPossibleDeliveryRoutes(t1, t2, maxStops, getRoutes = false) {
     const edges = Object.keys(routes[start]);
     // edges are towns interconnected from starting point
     currentRoute += start;
+
     // Exclude start point
-    if (currentRoute.length - 1 > maxStops) return;
+    if (maxStops) {
+      if (currentRoute.length - 1 > maxStops) return;
+    }
 
     for (let i = 0; i < edges.length; i++) {
       const town = edges[i];
