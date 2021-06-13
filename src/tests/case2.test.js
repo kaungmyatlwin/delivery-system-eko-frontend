@@ -6,6 +6,6 @@ describe('Case 2', () => {
   });
 
   it('E-E delivery maximum possible routes should return 5', () => {
-    expect(getPossibleDeliveryRoutes('E', 'E')).toBe(5);
+    expect(getPossibleDeliveryRoutes('E', 'E', null, true)).toBe(5);
   });
 });
