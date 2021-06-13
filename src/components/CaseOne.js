@@ -49,8 +49,8 @@ export default function CaseOne() {
       </Grid>
       <div style={{ textAlign: 'left' }}>
         {routedTowns.map((routedTown, index) => (
-          <div key={index}>
-            <InputLabel id={`town${index}`} shrink>Town {index + 1}</InputLabel>
+          <div key={index} className="mt-1">
+            <InputLabel id={`town${index}`}>Town {index + 1}</InputLabel>
             <Select
               id={`town${index}`}
               placeholder="Town 1"
