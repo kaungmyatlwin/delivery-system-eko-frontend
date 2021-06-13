@@ -36,9 +36,10 @@ export function getTotalCostOfRoute(towns = []) {
  * Gets all the possible deliver routes between 2 towns.
  * @param {String} t1 Town 1
  * @param {String} t2 Town 2
+ * @param {Number} maxStops Maximum stops for each route
  * @returns {Number}
  */
-export function getPossibleDeliveryRoutes(t1, t2, maxStops, getRoutes = false) {
+export function getPossibleDeliveryRoutes(t1, t2, maxStops) {
   if (!t1 || !t2) return;
 
   let totalPossibleRoutes = 0;
