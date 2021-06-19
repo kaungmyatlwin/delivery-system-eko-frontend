@@ -25,9 +25,9 @@ export default function CaseOne() {
   }
 
   function onChangeSelectTown(event, index) {
-    const clone = [...routedTowns];
-    clone[index] = (event.target.value);
-    setRoutedTowns(clone);
+    setRoutedTowns(
+      [...routedTowns].concat(event.target.value)
+    );
   }
 
   function onClickCalculateCost() {
