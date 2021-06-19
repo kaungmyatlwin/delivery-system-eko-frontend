@@ -19,14 +19,9 @@ export function getTotalCostOfRoute(towns = []) {
 
     const town = towns[i];
     const cost = routes[town][nextTown];
+    // Having `undefined` value in costs means there's no routes at that point
+    if (!cost) return 'No such route.';
     costs.push(cost);
-  }
-
-  // Having `undefined` value in costs means there's no routes at that point
-  const hasInvalidRoute = costs.includes(undefined);
-
-  if (hasInvalidRoute) {
-    return 'No such route.';
   }
 
   return costs.reduce((total, currentCost) => total + currentCost, 0);
